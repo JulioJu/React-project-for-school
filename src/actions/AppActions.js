@@ -28,7 +28,6 @@ import { SET_AUTH, CHANGE_FORM, SENDING_REQUEST, SET_ERROR_MESSAGE } from '../co
 import * as errorMessages  from '../constants/MessageConstants';
 import auth from '../utils/auth';
 import genSalt from '../utils/salt';
-import { browserHistory } from 'react-router';
 
 /**
  * Logs an user in
@@ -94,7 +93,7 @@ export function logout() {
       if (success === true) {
         dispatch(sendingRequest(false))
         dispatch(setAuthState(false));
-        browserHistory.replace(null, '/');
+        this.props.history.replace(null, '/');
       } else {
         dispatch(setErrorMessage(errorMessages.GENERAL_ERROR));
       }
@@ -213,7 +212,7 @@ function setErrorMessage(message) {
  */
 function forwardTo(location) {
   console.log('forwardTo(' + location + ')');
-  browserHistory.push(location);
+  this.props.push(location);
 }
 
 

@@ -32,4 +32,4 @@ var fakeRequest = {
   }
 }
 
-module.exports = fakeRequest;
+export default fakeRequest;

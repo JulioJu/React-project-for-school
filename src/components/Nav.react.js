@@ -7,7 +7,7 @@
  */
 
 import React, { Component } from 'react';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import { logout } from '../actions/AppActions';
 import LoadingButton from './LoadingButton.react';
 
@@ -21,7 +21,7 @@ class Nav extends Component {
           {this.props.currentlySending ? (
             <LoadingButton className="btn--nav" />
           ) : (
-            <a href="#" className="btn btn--login btn--nav" onClick={::this._logout}>Logout</a>
+              <a href="#" className="btn btn--login btn--nav" onClick={this._logout.bind(this)}>Logout</a>
           )}
         </div>
       ) : (
@@ -44,11 +44,6 @@ class Nav extends Component {
   _logout() {
     this.props.dispatch(logout());
   }
-}
-
-Nav.propTypes = {
-  loggedIn: React.PropTypes.bool.isRequired,
-  currentlySending: React.PropTypes.bool.isRequired
 }
 
 export default Nav;

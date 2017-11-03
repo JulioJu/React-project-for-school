@@ -12,7 +12,7 @@ import Nav from './Nav.react';
 import { connect } from 'react-redux';
 import auth from '../utils/auth';
 
-class App extends Component {
+export class App extends Component {
   render() {
     return(
       <div className="wrapper">
@@ -22,8 +22,6 @@ class App extends Component {
     )
   }
 }
-
-export default App;
 
 // REDUX STUFF
 

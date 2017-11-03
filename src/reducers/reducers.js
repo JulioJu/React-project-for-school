@@ -11,10 +11,12 @@
  */
 
 import { CHANGE_FORM, SET_AUTH, SENDING_REQUEST, SET_ERROR_MESSAGE } from '../constants/AppConstants';
+import auth from '../utils/auth';
 // Object.assign is not yet fully supported in all browsers, so we fallback to
 // a polyfill
-const assign = Object.assign || require('object.assign');
-import auth from '../utils/auth';
+// TODO line below won't compile
+// const assign = Object.assign || require('object.assign');
+const assign = Object.assign
 
 // The initial application state
 const initialState = {

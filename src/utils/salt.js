@@ -6,7 +6,7 @@
  * @param  {string}   seed The seed for salt
  * @return {string}        The resulted salt
  */
-module.exports = function(seed) {
+export default function(seed) {
   // Salt must be 16 bytes
   const bytes = [];
   for (let i = 0, l = seed.length; i < l; i++) {

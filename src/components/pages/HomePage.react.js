@@ -7,7 +7,7 @@
  */
 
 import React, { Component } from 'react';
-import { Link } from 'react-router';
+import { Link } from 'react-router-link';
 import Nav from '../Nav.react';
 import { connect } from 'react-redux';
 

@@ -12,9 +12,10 @@ import Form from '../Form.react';
 import { sendingRequest, register } from '../../actions/AppActions';
 import LoadingIndicator from '../LoadingIndicator.react';
 
-export default class RegisterPage extends Component {
+export class RegisterPage extends Component {
 	render() {
 		const dispatch = this.props.dispatch;
+        const location = this.props.location;
 		const { formState, currentlySending } = this.props.data;
     return (
 			<div className="form-page__wrapper">
@@ -24,7 +25,7 @@ export default class RegisterPage extends Component {
 					</div>
 					{/* While the form is sending, show the loading indicator,
 						otherwise show "Register" on the submit button */}
-		    	<Form data={formState} dispatch={dispatch} location={location} history={this.props.history} onSubmit={::this._register} btnText={"Register"} currentlySending={currentlySending}/>
+		    	    <Form data={formState} dispatch={dispatch} location={location} history={this.props.history} onSubmit={this._register.bind(this)} btnText={"Register"} currentlySending={currentlySending}/>
 				</div>
 			</div>
 		);

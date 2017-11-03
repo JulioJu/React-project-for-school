@@ -68,4 +68,4 @@ var auth = {
   onChange() {}
 }
 
-module.exports = auth;
+export default auth;

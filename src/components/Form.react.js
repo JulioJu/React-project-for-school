@@ -12,7 +12,9 @@ import LoadingButton from './LoadingButton.react';
 import ErrorMessage from './ErrorMessage.react';
 // Object.assign is not yet fully supported in all browsers, so we fallback to
 // a polyfill
-const assign = Object.assign || require('object.assign');
+// TODO line below won't compile
+// const assign = Object.assign || require('object.assign');
+const assign = Object.assign
 
 class LoginForm extends Component {
   render() {
@@ -71,12 +73,6 @@ class LoginForm extends Component {
     evt.preventDefault();
     this.props.onSubmit(this.props.data.username, this.props.data.password);
   }
-}
-
-LoginForm.propTypes = {
-  onSubmit: React.PropTypes.func.isRequired,
-  btnText: React.PropTypes.string.isRequired,
-  data: React.PropTypes.object.isRequired
 }
 
 export default LoginForm;

@@ -110,4 +110,4 @@ var server = {
 
 server.init();
 
-module.exports = server;
+export default server;
