@@ -18,6 +18,9 @@ import Dashboard from './components/pages/Dashboard.react';
 import NotFound from './components/pages/NotFound.react';
 import App from './components/App.react';
 
+// Import the CSS file, which webpack transfers to the build folder
+import './css/main.css';
+
 // Creates the Redux reducer with the redux-thunk middleware, which allows us
 // to do asynchronous things in the actions
 const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
@@ -46,7 +49,7 @@ const HelloWorld = HelloClass
 ReactDOM.render(
     <Provider store={store}>
         <BrowserRouter>
-            <div>
+            <div className="wrapper">
                 <Route component={App} />
                 <Switch>
                     <Route exact path="/" component={HomePage} />

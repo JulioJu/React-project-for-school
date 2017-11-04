@@ -15,7 +15,7 @@ import auth from '../utils/auth';
 export class App extends Component {
   render() {
     return(
-      <div className="wrapper">
+      <div>
         <Nav loggedIn={this.props.data.loggedIn} history={this.props.history} location={this.props.location} dispatch={this.props.dispatch} currentlySending={this.props.data.currentlySending} />
         { this.props.children }
       </div>
