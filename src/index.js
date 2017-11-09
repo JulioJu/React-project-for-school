@@ -1,22 +1,34 @@
 import 'babel-polyfill'
 
+import registerServiceWorker from './registerServiceWorker';
+
+// React
 import React, {Component} from 'react'
 import ReactDOM from 'react-dom'
-import {Router, Route, browserHistory} from 'react-router'
-import {createStore, applyMiddleware} from 'redux'
-import createSagaMiddleware from 'redux-saga'
+import { Switch, BrowserRouter, Route} from 'react-router-dom';
+
+// Redux
+import { createStore, applyMiddleware } from 'redux';
 import {Provider} from 'react-redux'
+import createSagaMiddleware from 'redux-saga'
 import {createLogger} from 'redux-logger'
+
+// Redux local config
 import reducer from './reducers'
 import rootSaga from './sagas'
 import {clearError} from './actions'
 
+// history
+import history from './history'
+
+// css
 import './styles/main.css'
 
+// Import pages
 import App from './components/App'
-import Home from './components/Home'
-import Login from './components/Login'
-import Register from './components/Register'
+import HomePage from './components/Home'
+import LoginPage from './components/Login'
+import RegisterPage from './components/Register'
 import Dashboard from './components/Dashboard'
 import NotFound from './components/NotFound'
 
@@ -64,26 +76,43 @@ function checkAuth (nextState, replace) {
   }
 }
 
+// Both notations are the same
+// const HomeWorld = () => (
+//     <div>
+//         <h2>HomeWorld</h2>
+//     </div>
+// )
+class HelloClass extends React.Component {
+    render() {
+        return (
+            <div><h2>Hellow World</h2>
+            </div>
+        );
+    }
+}
+const HelloWorld = HelloClass
+
 // Mostly boilerplate, except for the routes. These are the pages you can go to,
 // which are all wrapped in the App component, which contains the navigation etc
-class LoginFlow extends Component {
-  render () {
-    return (
-      <Provider store={store}>
-        <Router history={browserHistory}>
-          <Route component={App}>
-            <Route path='/' component={Home} />
-            <Route onEnter={checkAuth}>
-              <Route path='/login' component={Login} />
-              <Route path='/register' component={Register} />
-              <Route path='/dashboard' component={Dashboard} />
-            </Route>
-            <Route path='*' component={NotFound} />
-          </Route>
-        </Router>
-      </Provider>
-    )
-  }
-}
+// See https://medium.com/@pshrmn/a-simple-react-router-v4-tutorial-7f23ff27adf
+// See also https://stackoverflow.com/questions/42254929/how-to-nest-routes-in-react-router-v4
+ReactDOM.render(
+    <Provider store={store}>
+        <BrowserRouter history={history}>
+            <div>
+                <Route component={App} />
+                <Switch>
+                    <Route exact path="/" component={HomePage} />
+                    <Route path="/login" component={LoginPage} />
+                    <Route path="/register" component={RegisterPage} />
+                    <Route path="/dashboard" component={Dashboard} />
+                    <Route path="/hello-world" component={HelloWorld} />
+                    <Route path="*" component={NotFound} />
+                </Switch>
+            </div>
+        </BrowserRouter>
+    </Provider>,
+    document.getElementById('root')
+);
 
-ReactDOM.render(<LoginFlow />, document.getElementById('app'))
+registerServiceWorker();

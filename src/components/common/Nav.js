@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
+import PropTypes from 'prop-types';
 import LoadingButton from './LoadingButton'
-import {Link} from 'react-router'
+import {Link} from 'react-router-dom'
 
 import {logout, clearError} from '../../actions'
 
@@ -50,9 +51,9 @@ class Nav extends Component {
 }
 
 Nav.propTypes = {
-  loggedIn: React.PropTypes.bool,
-  currentlySending: React.PropTypes.bool,
-  dispatch: React.PropTypes.func
+  loggedIn: PropTypes.bool,
+  currentlySending: PropTypes.bool,
+  dispatch: PropTypes.func
 }
 
 export default Nav
