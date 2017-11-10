@@ -1,11 +1,13 @@
-import 'babel-polyfill'
+// Should work on firefox 56+
+// https://redux.js.org/docs/advanced/AsyncActions.html
+// import 'babel-polyfill'
 
 import registerServiceWorker from './registerServiceWorker';
 
 // React
-import React, {Component} from 'react'
+import React from 'react'
 import ReactDOM from 'react-dom'
-import { Switch, BrowserRouter, Route} from 'react-router-dom';
+import { Switch, Router, Route, Redirect} from 'react-router-dom';
 
 // Redux
 import { createStore, applyMiddleware } from 'redux';
@@ -44,36 +46,12 @@ const store = createStore(reducer, applyMiddleware(logger, sagaMiddleware))
 // We run the root saga automatically
 sagaMiddleware.run(rootSaga)
 
-/**
-* Checks authentication status on route change
-* @param  {object}   nextState The state we want to change into when we change routes
-* @param  {function} replace Function provided by React Router to replace the location
-*/
-function checkAuth (nextState, replace) {
-  const {loggedIn} = store.getState()
-
-  store.dispatch(clearError())
-
-  // Check if the path isn't dashboard. That way we can apply specific logic to
-  // display/render the path we want to
-  if (nextState.location.pathname !== '/dashboard') {
-    if (loggedIn) {
-      if (nextState.location.state && nextState.location.pathname) {
-        replace(nextState.location.pathname)
-      } else {
-        replace('/')
-      }
-    }
-  } else {
-    // If the user is already logged in, forward them to the homepage
-    if (!loggedIn) {
-      if (nextState.location.state && nextState.location.pathname) {
-        replace(nextState.location.pathname)
-      } else {
-        replace('/')
-      }
-    }
-  }
+function isAuth () {
+    const {loggedIn} = store.getState()
+    store.dispatch(clearError())
+    if (loggedIn)
+        return true;
+    return false;
 }
 
 // Both notations are the same
@@ -96,21 +74,31 @@ const HelloWorld = HelloClass
 // which are all wrapped in the App component, which contains the navigation etc
 // See https://medium.com/@pshrmn/a-simple-react-router-v4-tutorial-7f23ff27adf
 // See also https://stackoverflow.com/questions/42254929/how-to-nest-routes-in-react-router-v4
+// See also https://github.com/ReactTraining/react-router/issues/3498
+// See also https://github.com/gatsbyjs/gatsby/issues/1913
+// See also https://stackoverflow.com/questions/32898264/react-router-authorization (The solution:
+// founded thanks search "react-router 4 auth example" in Google)
+// I've also espacially seen https://codeburst.io/react-router-v4-unofficial-migration-guide-5a370b8905a (doesn't work)
+// and https://github.com/ReactTraining/react-router/issues/3854 (nothing interesting)
+// etc.
 ReactDOM.render(
     <Provider store={store}>
-        <BrowserRouter history={history}>
+        <Router history={history}>
             <div className="wrapper">
                 <Route component={App} />
                 <Switch>
                     <Route exact path="/" component={HomePage} />
-                    <Route path="/login" component={LoginPage} />
-                    <Route path="/register" component={RegisterPage} />
-                    <Route path="/dashboard" component={Dashboard} />
+                    <Route path="/login" render={() => !isAuth() ?
+                        <LoginPage /> : <Redirect to="/" />} />
+                    <Route path="/register" render={() => isAuth() ?
+                        <RegisterPage /> : <Redirect to="/register" />} />
+                    <Route path="/dashboard" render={() => isAuth() ?
+                        <Dashboard /> : <Redirect to="/login" />} />
                     <Route path="/hello-world" component={HelloWorld} />
                     <Route path="*" component={NotFound} />
                 </Switch>
             </div>
-        </BrowserRouter>
+        </Router>
     </Provider>,
     document.getElementById('root')
 );
