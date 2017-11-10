@@ -99,7 +99,7 @@ const HelloWorld = HelloClass
 ReactDOM.render(
     <Provider store={store}>
         <BrowserRouter history={history}>
-            <div>
+            <div className="wrapper">
                 <Route component={App} />
                 <Switch>
                     <Route exact path="/" component={HomePage} />
