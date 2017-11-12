@@ -5,7 +5,8 @@ import LoadingIndicator from './LoadingIndicator';
 const LoadingButton: React.StatelessComponent<{className?}> = props => (
   <a className={props.className + ' btn btn--loading'} disabled>
       <LoadingIndicator/>
-  </a>);
+  </a>
+);
 
 LoadingButton.propTypes = {
     className: PropTypes.string

@@ -88,9 +88,60 @@ module.exports = {
         is pined as « Well Tested », contrary to
         [login-flow](https://react.rocks/example/login-flow)
 
+## TypeScript vs Flow
+I've hesitated between TypeScript and Flow:
+* Flow could be added very simply and Facebook use React + Flow + flux.
+* TypeScript needs adaptation of the code, contratry to flow.
+* TypeScript is more popular (actually, no trend record at
+https://insights.stackoverflow.com/trends contrary to TypeScript).
+* Flow have less features (https://github.com/niieani/typescript-vs-flowtype)
+
+## Create-react-app typescript
+* Microsoft have edited a create-react-app script bundle with TypeScript.
+See https://github.com/wmonk/create-react-app-typescript.
+* This script is actually maintained at
+    https://github.com/wmonk/create-react-app-typescript. This script is
+up-to-date with the official
+https://github.com/facebookincubator/create-react-app, but the typescript
+version is not the last one (from september, v 2.5.3)
+* There is also https://github.com/lwd-technology/react-app-rewire-typescript
+    but he cannot integrate ts-jest.
+* Actually, there is a pull request to add TypeScript in the official
+    `create-react-app`
+    (https://github.com/facebookincubator/create-react-app/pull/2815)
+* See also
+    * https://www.typescriptlang.org/docs/handbook/jsx.html
+    * https://www.typescriptlang.org/docs/handbook/migrating-from-javascript.html
+    * https://www.gitbook.com/book/charleslbryant/hello-react-and-typescript/details
+
+### TypeScript configuration for this project
+* **To works, you must absolutly modify a file:**
+    * In file `./node_modules/@types/react/index.d.ts`, under
+    `interface AnchorHTMLAttributes<T> extends HTMLAttributes<T> {` (actually
+    line 2603) property `disabled? boolean;`.
+    * Otherwise cause
+    "`error TS2339: Property 'disabled' does not exist on type 'DetailedHTMLProps<AnchorHTMLAttributes<HTMLAnchorElement>, HTMLAnchorElement>'.
+    `"
+
+## Know problems
+* In src/index.tsx, I added `tslint:disable:jsx-no-lambda`. See
+    https://github.com/palantir/tslint-react why it's not good.
+    * In console cause error
+        `Warning: Cannot update during an existing state transition
+        (such as within `render` or another component's constructor).
+        Render methods should be a pure function of props and state;
+        constructor side-effects are an anti-pattern, but can be moved to
+        \`componentWillMount\`.`
+* In function loginFlow at src/sagas/index.ts, there is an unknown bug.
+* To avoid the mandatory to modify `./node_modules/@types/react/index.d.ts`,
+    (see above) change `<a />` to `<button />` and fix the problem with
+    `<button />`.
+
 ## See also
 * https://react.rocks/
 * https://react.rocks/example/saga-login-flow
 * https://react.rocks/example/login-flow
 * https://github.com/sotojuan/saga-login-flow/ (especially the README.md)
 * https://github.com/mxstbr/login-flow (especially the README.md)
+* redux-logger displays lot of useful and understandable informations in the
+    console.

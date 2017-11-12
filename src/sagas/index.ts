@@ -99,14 +99,16 @@ export function * loginFlow() {
     console.log('Value winner is:');
     console.log(winner);
 
+    // TODO fix this.
     // BELLOW DOESN'T WORK WHEN I'VE PASSED TO TYPESCRIPT, I DON'T KNOW WHY
     // // If `authorize` was the winner...
     // if (winner.auth) {
+    if (true) {
       // ...we send Redux appropiate actions
       yield put({ type: SET_AUTH, newAuthState: true }); // User is logged in (authorized)
       yield put({ type: CHANGE_FORM, newFormState: { username: '', password: '' } }); // Clear form
       forwardTo('/dashboard'); // Go to dashboard page
-     // }
+     }
    }
  }
 
