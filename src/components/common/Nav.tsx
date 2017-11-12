@@ -7,7 +7,7 @@ import { logout, clearError } from '../../actions';
 
 interface IProps {
   loggedIn: any;
-  currentlySending;
+  currentlySending: any;
   dispatch: any;
   history: any;
   location: any;

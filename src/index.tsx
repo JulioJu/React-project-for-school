@@ -91,17 +91,17 @@ ReactDOM.render(
                     <Route
                         path="/login"
                         render={() => !isAuth() ?
-                        <LoginPage /> : <Redirect to="/" />}
+                            <LoginPage /> : <Redirect to="/" />}
                     />
                     <Route
                         path="/register"
-                        render={() => isAuth() ?
-                        <RegisterPage /> : <Redirect to="/register" />}
+                        render={() => !isAuth() ?
+                            <RegisterPage /> : <Redirect to="/" />}
                     />
                     <Route
                         path="/dashboard"
                         render={() => isAuth() ?
-                        <Dashboard /> : <Redirect to="/login" />}
+                            <Dashboard /> : <Redirect to="/login" />}
                     />
                     <Route path="/hello-world" component={HelloWorld} />
                     <Route path="*" component={NotFound} />

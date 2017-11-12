@@ -3,9 +3,9 @@ import * as PropTypes from 'prop-types';
 import LoadingIndicator from './LoadingIndicator';
 
 const LoadingButton: React.StatelessComponent<{className?}> = props => (
-  <button className={props.className + ' btn btn--loading'} disabled>
+  <a className={props.className + ' btn btn--loading'} disabled>
       <LoadingIndicator/>
-  </button>);
+  </a>);
 
 LoadingButton.propTypes = {
     className: PropTypes.string
