@@ -13,17 +13,17 @@ import auth from '../auth'
 
 // The initial application state
 let initialState = {
-  formState: {
-    username: '',
-    password: ''
-  },
+  loggedIn: auth.loggedIn(),
   error: '',
   currentlySending: false,
-  loggedIn: auth.loggedIn()
+  formState: {
+    username: '',
+    password: '',
+  },
 }
 
 // Takes care of changing the application state
-function reducer (state = initialState, action) {
+function reducer (state = initialState, action: any) {
   switch (action.type) {
     case CHANGE_FORM:
       return {...state, formState: action.newFormState}

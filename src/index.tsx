@@ -5,8 +5,8 @@
 import registerServiceWorker from './registerServiceWorker';
 
 // React
-import React from 'react'
-import ReactDOM from 'react-dom'
+import * as React from 'react'
+import * as ReactDOM from 'react-dom'
 import { Switch, Router, Route, Redirect} from 'react-router-dom';
 
 // Redux
@@ -39,7 +39,7 @@ const logger = createLogger({
   predicate: (getState, action) => action.type !== 'CHANGE_FORM'
 })
 
-const sagaMiddleware = createSagaMiddleware()
+const sagaMiddleware = createSagaMiddleware();
 
 // Creates the Redux store using our reducer and the logger and saga middlewares
 const store = createStore(reducer, applyMiddleware(logger, sagaMiddleware))
@@ -47,8 +47,8 @@ const store = createStore(reducer, applyMiddleware(logger, sagaMiddleware))
 sagaMiddleware.run(rootSaga)
 
 function isAuth () {
-    const {loggedIn} = store.getState()
-    store.dispatch(clearError())
+    const {loggedIn} = store.getState();
+    store.dispatch(clearError());
     if (loggedIn)
         return true;
     return false;

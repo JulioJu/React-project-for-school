@@ -1,12 +1,13 @@
-import React, {Component} from 'react'
-import PropTypes from 'prop-types';
+import * as React from 'react'
+import {Component} from 'react'
+import * as PropTypes from 'prop-types';
 import ErrorMessage from './ErrorMessage'
 import LoadingButton from './LoadingButton'
 
 import {changeForm} from '../../actions'
 
 class Form extends Component {
-  constructor (props) {
+  constructor (props: any) {
     super(props)
 
     this._onSubmit = this._onSubmit.bind(this)
@@ -14,6 +15,7 @@ class Form extends Component {
     this._changePassword = this._changePassword.bind(this)
   }
   render () {
+      console.log(this.props.error);
     const {error} = this.props
 
     return (

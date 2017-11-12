@@ -1,12 +1,13 @@
-import React, {Component} from 'react'
-import PropTypes from 'prop-types';
+import * as React from 'react';
+import {Component} from 'react';
+import * as PropTypes from 'prop-types';
 import LoadingButton from './LoadingButton'
 import {Link} from 'react-router-dom'
 
 import {logout, clearError} from '../../actions'
 
 class Nav extends Component {
-  constructor (props) {
+  constructor (props: any) {
     super(props)
     this._logout = this._logout.bind(this)
     this._clearError = this._clearError.bind(this)

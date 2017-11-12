@@ -1,4 +1,5 @@
-import React, {Component} from 'react'
+import * as React from 'react';
+import {Component} from 'react'
 import {connect} from 'react-redux'
 
 class Home extends Component {
@@ -25,10 +26,8 @@ class Home extends Component {
   }
 }
 
-function select (state) {
-  return {
+const mapStateToProps = state => ({
     data: state
-  }
-}
+});
 
-export default connect(select)(Home)
+export default connect(mapStateToProps)(Home)

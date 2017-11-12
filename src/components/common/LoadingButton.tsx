@@ -1,8 +1,8 @@
-import React from 'react'
-import PropTypes from 'prop-types';
+import * as React from 'react'
+import * as PropTypes from 'prop-types';
 import LoadingIndicator from './LoadingIndicator'
 
-function LoadingButton (props) {
+function LoadingButton (props: any) {
   return (
     <button href='#' className={props.className + ' btn btn--loading'} disabled='true'>
       <LoadingIndicator />
