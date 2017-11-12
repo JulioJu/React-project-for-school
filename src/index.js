@@ -88,18 +88,27 @@ ReactDOM.render(
                 <Route component={App} />
                 <Switch>
                     <Route exact path="/" component={HomePage} />
-                    <Route path="/login" render={() => !isAuth() ?
-                        <LoginPage /> : <Redirect to="/" />} />
-                    <Route path="/register" render={() => isAuth() ?
-                        <RegisterPage /> : <Redirect to="/register" />} />
-                    <Route path="/dashboard" render={() => isAuth() ?
-                        <Dashboard /> : <Redirect to="/login" />} />
+                    <Route
+                        path="/login"
+                        render={() => !isAuth() ?
+                            <LoginPage /> : <Redirect to="/" />}
+                    />
+                    <Route
+                        path="/register"
+                        render={() => !isAuth() ?
+                            <RegisterPage /> : <Redirect to="/" />}
+                    />
+                    <Route
+                        path="/dashboard"
+                        render={() => isAuth() ?
+                            <Dashboard /> : <Redirect to="/login" />}
+                    />
                     <Route path="/hello-world" component={HelloWorld} />
                     <Route path="*" component={NotFound} />
                 </Switch>
             </div>
         </Router>
-    </Provider>,
+</Provider>,
     document.getElementById('root')
 );
 
