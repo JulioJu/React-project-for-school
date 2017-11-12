@@ -84,6 +84,7 @@ module.exports = {
         Maybe redux-saga is better to understand how react and redux work for a
         newbie because the code isn't mix.
     * On https://react.rocks,
+??? from here until ???END lines may have been inserted/deleted
         (saga-login-flow](https://react.rocks/example/saga-login-flow)
         is pined as « Well Tested », contrary to
         [login-flow](https://react.rocks/example/login-flow)
@@ -113,15 +114,9 @@ version is not the last one (from september, v 2.5.3)
     * https://www.typescriptlang.org/docs/handbook/jsx.html
     * https://www.typescriptlang.org/docs/handbook/migrating-from-javascript.html
     * https://www.gitbook.com/book/charleslbryant/hello-react-and-typescript/details
-
-### TypeScript configuration for this project
-* **To works, you must absolutly modify a file:**
-    * In file `./node_modules/@types/react/index.d.ts`, under
-    `interface AnchorHTMLAttributes<T> extends HTMLAttributes<T> {` (actually
-    line 2603) property `disabled? boolean;`.
-    * Otherwise cause
-    "`error TS2339: Property 'disabled' does not exist on type 'DetailedHTMLProps<AnchorHTMLAttributes<HTMLAnchorElement>, HTMLAnchorElement>'.
-    `"
+* With the tsconfig.json and tslint.json of create-react-app, there were some
+    problems. I've adapted this files from the famouse JHipster project.
+    Actually, do not add checkJS in tsconfig.json.
 
 ## Know problems
 * In src/index.tsx, I added `tslint:disable:jsx-no-lambda`. See
@@ -132,10 +127,23 @@ version is not the last one (from september, v 2.5.3)
         Render methods should be a pure function of props and state;
         constructor side-effects are an anti-pattern, but can be moved to
         \`componentWillMount\`.`
-* In function loginFlow at src/sagas/index.ts, there is an unknown bug.
-* To avoid the mandatory to modify `./node_modules/@types/react/index.d.ts`,
-    (see above) change `<a />` to `<button />` and fix the problem with
-    `<button />`.
+* In function loginFlow at src/sagas/index.ts, there was an unknown bug. Fixed
+    thanks a workaround.
+* ~~To avoid the mandatory to modify `./node_modules/@types/react/index.d.ts`,
+    (see bellow) change `<a />` to `<button />` and fix the problem with
+    `<button />`.~~
+    * ~~ **To works, you must absolutly modify a file:**
+        * In file `./node_modules/@types/react/index.d.ts`, under
+            `interface AnchorHTMLAttributes<T> extends HTMLAttributes<T> {` (actually
+            line 2603) property `disabled? boolean;`.
+        * Otherwise cause
+            "`error TS2339: Property 'disabled' does not exist on type 'DetailedHTMLProps<AnchorHTMLAttributes<HTMLAnchorElement>, HTMLAnchorElement>'.
+            `"~~
+    * Probably this bugs was due to problem in src/sagas/index.ts (see above),
+        but why ?
+
+## Todos
+* In tsconfig.json, strictNullChecks must be true as Microsoft advise.
 
 ## See also
 * https://react.rocks/
@@ -145,3 +153,4 @@ version is not the last one (from september, v 2.5.3)
 * https://github.com/mxstbr/login-flow (especially the README.md)
 * redux-logger displays lot of useful and understandable informations in the
     console.
+???END
