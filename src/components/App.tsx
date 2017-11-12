@@ -1,9 +1,25 @@
-import React, {Component} from 'react'
-import PropTypes from 'prop-types';
-import {connect} from 'react-redux'
-import Nav from './common/Nav'
+import * as React from 'react';
+import * as PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import Nav from './common/Nav';
 
-class App extends Component {
+interface IProps {
+  data: any;
+  history: any;
+  dispatch: any;
+  location: any;
+}
+
+class App extends React.Component<IProps> {
+
+  static propTypes = {
+    data: PropTypes.object,
+    history: PropTypes.object,
+    location: PropTypes.object,
+    children: PropTypes.object,
+    dispatch: PropTypes.func
+  };
+
   render () {
     return (
       <div>
@@ -14,22 +30,14 @@ class App extends Component {
           location={this.props.location} />
         {this.props.children}
       </div>
-    )
+    );
   }
 }
 
-App.propTypes = {
-  data: PropTypes.object,
-  history: PropTypes.object,
-  location: PropTypes.object,
-  children: PropTypes.object,
-  dispatch: PropTypes.func
-}
-
-function select (state) {
+function select(state) {
   return {
     data: state
-  }
+  };
 }
 
-export default connect(select)(App)
+export default connect(select)(App);

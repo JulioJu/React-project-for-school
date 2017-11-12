@@ -1,18 +1,16 @@
-import * as React from 'react'
+import * as React from 'react';
 import * as PropTypes from 'prop-types';
 
-function ErrorMessage (props) {
-  return (
-    <div className='form__error-wrapper js-form__err-animation'>
-      <p className='form__error'>
+const ErrorMessage: React.StatelessComponent<{error}> = props => (
+    <div className="form__error-wrapper js-form__err-animation">
+      <p className="form__error">
         {props.error}
       </p>
     </div>
-  )
-}
+  );
 
 ErrorMessage.propTypes = {
   error: PropTypes.string
-}
+};
 
-export default ErrorMessage
+export default ErrorMessage;

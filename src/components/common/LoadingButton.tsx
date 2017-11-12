@@ -1,17 +1,14 @@
-import * as React from 'react'
+import * as React from 'react';
 import * as PropTypes from 'prop-types';
-import LoadingIndicator from './LoadingIndicator'
+import LoadingIndicator from './LoadingIndicator';
 
-function LoadingButton (props: any) {
-  return (
-    <button href='#' className={props.className + ' btn btn--loading'} disabled='true'>
-      <LoadingIndicator />
-    </button>
-  )
-}
+const LoadingButton: React.StatelessComponent<{className?}> = props => (
+  <button className={props.className + ' btn btn--loading'} disabled>
+      <LoadingIndicator/>
+  </button>);
 
 LoadingButton.propTypes = {
-  className: PropTypes.string
-}
+    className: PropTypes.string
+};
 
-export default LoadingButton
+export default LoadingButton;

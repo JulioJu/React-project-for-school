@@ -1,56 +1,56 @@
-// Should work on firefox 56+
-// https://redux.js.org/docs/advanced/AsyncActions.html
-// import 'babel-polyfill'
+// tslint:disable:jsx-no-lambda no-submodule-imports
+// —————————————————————————————
 
 import registerServiceWorker from './registerServiceWorker';
 
 // React
-import * as React from 'react'
-import * as ReactDOM from 'react-dom'
-import { Switch, Router, Route, Redirect} from 'react-router-dom';
+import * as React from 'react';
+import * as ReactDOM from 'react-dom';
+import { Switch, Router, Route, Redirect } from 'react-router-dom';
 
 // Redux
 import { createStore, applyMiddleware } from 'redux';
-import {Provider} from 'react-redux'
-import createSagaMiddleware from 'redux-saga'
-import {createLogger} from 'redux-logger'
+import { Provider } from 'react-redux';
+import createSagaMiddleware from 'redux-saga';
+import { createLogger } from 'redux-logger';
 
 // Redux local config
-import reducer from './reducers'
-import rootSaga from './sagas'
-import {clearError} from './actions'
+import reducer from './reducers';
+import rootSaga from './sagas';
+import { clearError } from './actions';
 
 // history
-import history from './history'
+import history from './history';
 
 // css
-import './styles/main.css'
+import './styles/main.css';
 
 // Import pages
-import App from './components/App'
-import HomePage from './components/Home'
-import LoginPage from './components/Login'
-import RegisterPage from './components/Register'
-import Dashboard from './components/Dashboard'
-import NotFound from './components/NotFound'
+import App from './components/App';
+import HomePage from './components/Home';
+import LoginPage from './components/Login';
+import RegisterPage from './components/Register';
+import Dashboard from './components/Dashboard';
+import NotFound from './components/NotFound';
 
 const logger = createLogger({
   // Ignore `CHANGE_FORM` actions in the logger, since they fire after every keystroke
   predicate: (getState, action) => action.type !== 'CHANGE_FORM'
-})
+});
 
 const sagaMiddleware = createSagaMiddleware();
 
 // Creates the Redux store using our reducer and the logger and saga middlewares
-const store = createStore(reducer, applyMiddleware(logger, sagaMiddleware))
+const store = createStore(reducer, applyMiddleware(logger, sagaMiddleware));
 // We run the root saga automatically
-sagaMiddleware.run(rootSaga)
+sagaMiddleware.run(rootSaga);
 
-function isAuth () {
-    const {loggedIn} = store.getState();
+function isAuth() {
+    const { loggedIn } = store.getState();
     store.dispatch(clearError());
-    if (loggedIn)
+    if (loggedIn) {
         return true;
+    }
     return false;
 }
 
@@ -68,7 +68,7 @@ class HelloClass extends React.Component {
         );
     }
 }
-const HelloWorld = HelloClass
+const HelloWorld = HelloClass;
 
 // Mostly boilerplate, except for the routes. These are the pages you can go to,
 // which are all wrapped in the App component, which contains the navigation etc
@@ -88,12 +88,21 @@ ReactDOM.render(
                 <Route component={App} />
                 <Switch>
                     <Route exact path="/" component={HomePage} />
-                    <Route path="/login" render={() => !isAuth() ?
-                        <LoginPage /> : <Redirect to="/" />} />
-                    <Route path="/register" render={() => isAuth() ?
-                        <RegisterPage /> : <Redirect to="/register" />} />
-                    <Route path="/dashboard" render={() => isAuth() ?
-                        <Dashboard /> : <Redirect to="/login" />} />
+                    <Route
+                        path="/login"
+                        render={() => !isAuth() ?
+                        <LoginPage /> : <Redirect to="/" />}
+                    />
+                    <Route
+                        path="/register"
+                        render={() => isAuth() ?
+                        <RegisterPage /> : <Redirect to="/register" />}
+                    />
+                    <Route
+                        path="/dashboard"
+                        render={() => isAuth() ?
+                        <Dashboard /> : <Redirect to="/login" />}
+                    />
                     <Route path="/hello-world" component={HelloWorld} />
                     <Route path="*" component={NotFound} />
                 </Switch>
