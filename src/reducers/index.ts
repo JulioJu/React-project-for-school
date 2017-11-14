@@ -41,3 +41,4 @@ function reducer(state = initialState, action: any) {
 }
 
 export default reducer;
+// vim: sw=2 ts=2 et:

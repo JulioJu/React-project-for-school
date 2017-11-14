@@ -14,3 +14,4 @@ ErrorMessage.propTypes = {
 };
 
 export default ErrorMessage;
+// vim: sw=2 ts=2 et:

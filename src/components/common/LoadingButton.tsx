@@ -13,3 +13,4 @@ LoadingButton.propTypes = {
 };
 
 export default LoadingButton;
+// vim: sw=2 ts=2 et:

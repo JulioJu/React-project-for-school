@@ -11,3 +11,4 @@ export const REGISTER_REQUEST = 'REGISTER_REQUEST';
 export const LOGOUT = 'LOGOUT';
 export const REQUEST_ERROR = 'REQUEST_ERROR';
 export const CLEAR_ERROR = 'CLEAR_ERROR';
+// vim: sw=2 ts=2 et:

@@ -48,3 +48,4 @@ function select(state) {
 }
 
 export default connect(select)(Register);
+// vim: sw=2 ts=2 et:

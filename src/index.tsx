@@ -47,12 +47,12 @@ const store = createStore(reducer, applyMiddleware(logger, sagaMiddleware));
 sagaMiddleware.run(rootSaga);
 
 function isAuth() {
-    const { loggedIn } = store.getState();
-    store.dispatch(clearError());
-    if (loggedIn) {
-        return true;
-    }
-    return false;
+  const { loggedIn } = store.getState();
+  store.dispatch(clearError());
+  if (loggedIn) {
+    return true;
+  }
+  return false;
 }
 
 // Both notations are the same
@@ -62,12 +62,12 @@ function isAuth() {
 //     </div>
 // )
 class HelloClass extends React.Component {
-    render() {
-        return (
-            <div><h2>Hellow World</h2>
-            </div>
-        );
-    }
+  render() {
+    return (
+      <div><h2>Hellow World</h2>
+      </div>
+    );
+  }
 }
 const HelloWorld = HelloClass;
 
@@ -83,34 +83,35 @@ const HelloWorld = HelloClass;
 // and https://github.com/ReactTraining/react-router/issues/3854 (nothing interesting)
 // etc.
 ReactDOM.render(
-    <Provider store={store}>
-        <Router history={history}>
-            <div className="wrapper">
-                <Route component={App} />
-                <Switch>
-                    <Route exact path="/" component={HomePage} />
-                    <Route
-                        path="/login"
-                        render={() => !isAuth() ?
-                            <LoginPage /> : <Redirect to="/" />}
-                    />
-                    <Route
-                        path="/register"
-                        render={() => !isAuth() ?
-                            <RegisterPage /> : <Redirect to="/" />}
-                    />
-                    <Route
-                        path="/dashboard"
-                        render={() => isAuth() ?
-                            <Dashboard /> : <Redirect to="/login" />}
-                    />
-                    <Route path="/hello-world" component={HelloWorld} />
-                    <Route path="*" component={NotFound} />
-                </Switch>
-            </div>
-        </Router>
-    </Provider>,
-    document.getElementById('root')
+  <Provider store={store}>
+    <Router history={history}>
+      <div className="wrapper">
+        <Route component={App} />
+        <Switch>
+          <Route exact path="/" component={HomePage} />
+          <Route
+              path="/login"
+              render={() => !isAuth() ?
+            <LoginPage /> : <Redirect to="/" />}
+          />
+          <Route
+              path="/register"
+              render={() => !isAuth() ?
+            <RegisterPage /> : <Redirect to="/" />}
+          />
+          <Route
+              path="/dashboard"
+              render={() => isAuth() ?
+            <Dashboard /> : <Redirect to="/login" />}
+          />
+          <Route path="/hello-world" component={HelloWorld} />
+          <Route path="*" component={NotFound} />
+        </Switch>
+      </div>
+    </Router>
+  </Provider>,
+  document.getElementById('root')
 );
 
 registerServiceWorker();
+// vim: sw=2 ts=2 et:

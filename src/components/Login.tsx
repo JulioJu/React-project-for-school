@@ -56,3 +56,4 @@ function select(state) {
 
 // Wrap the component to inject dispatch and state into it
 export default connect(select)(Login);
+// vim: sw=2 ts=2 et:

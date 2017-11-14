@@ -41,3 +41,4 @@ function select(state) {
 }
 
 export default connect(select)(App);
+// vim: sw=2 ts=2 et:

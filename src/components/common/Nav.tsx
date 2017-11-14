@@ -66,3 +66,4 @@ class Nav extends React.Component<IProps> {
 }
 
 export default Nav;
+// vim: sw=2 ts=2 et:

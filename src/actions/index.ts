@@ -81,3 +81,4 @@ export function requestError(error) {
 export function clearError() {
   return { type: CLEAR_ERROR };
 }
+// vim: sw=2 ts=2 et:
