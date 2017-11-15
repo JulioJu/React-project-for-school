@@ -2,8 +2,8 @@
   width: 100%;
   position: relative;
   padding-top: 1.75em;
-  border-top: 1px solid $very-light-grey;
-  border-bottom: 1px solid $very-light-grey;
+  border-top: 1px solid $brand-color;
+  border-bottom: 1px solid $brand-color;
   background-color: #fff;
 }
 
@@ -22,7 +22,8 @@
 }
 
 .form__field-label {
-  position: absolute;
+  /* Commented, because when we scroll down, labels are on the nav */
+  /* position: absolute; */
   top: 0;
   left: 0;
   width: 100%;

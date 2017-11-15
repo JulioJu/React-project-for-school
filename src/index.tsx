@@ -29,8 +29,7 @@ import './styles/main.css';
 // Import pages
 import App from './components/App';
 import HomePage from './components/Home';
-import LoginPage from './components/Login';
-import RegisterPage from './components/Register';
+import { LoginPage, RegisterPage, RegisterEnterprise, RegisterFreelance } from './components/profil';
 import Dashboard from './components/Dashboard';
 import NotFound from './components/NotFound';
 
@@ -98,6 +97,16 @@ ReactDOM.render(
               path="/register"
               render={() => !isAuth() ?
             <RegisterPage /> : <Redirect to="/" />}
+          />
+          <Route
+              path="/register-freelance"
+              render={() => !isAuth() ?
+            <RegisterFreelance /> : <Redirect to="/" />}
+          />
+          <Route
+              path="/register-enterprise"
+              render={() => !isAuth() ?
+            <RegisterEnterprise /> : <Redirect to="/" />}
           />
           <Route
               path="/dashboard"

@@ -1,11 +1,10 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
-import ErrorMessage from './ErrorMessage';
-import LoadingButton from './LoadingButton';
+import { ErrorMessage, LoadingButton } from '../../common';
 
-import { changeForm } from '../../actions';
+import { changeForm } from '../../../actions';
 
-export interface IProps {
+interface IProps {
   error: any;
   dispatch: any;
   onSubmit: any;
@@ -15,7 +14,7 @@ export interface IProps {
   history: any;
 }
 
-class Form extends React.Component<IProps> {
+export class FormCommunMaster extends React.Component<IProps> {
 
   static propTypes = {
       dispatch: PropTypes.func,
@@ -35,7 +34,7 @@ class Form extends React.Component<IProps> {
     this._changePassword = this._changePassword.bind(this);
   }
   render () {
-    const { error } = this.props;
+    const { error, children } = this.props;
 
     return (
       <form className="form" onSubmit={this._onSubmit}>
@@ -52,7 +51,7 @@ class Form extends React.Component<IProps> {
             autoCapitalize="off"
             spellCheck={false} />
           <label className="form__field-label" htmlFor="username">
-            Username
+            Login
           </label>
         </div>
         <div className="form__field-wrapper">
@@ -67,6 +66,7 @@ class Form extends React.Component<IProps> {
             Password
           </label>
         </div>
+        {children}
         <div className="form__submit-btn-wrapper">
           {this.props.currentlySending ? (
             <LoadingButton />
@@ -98,5 +98,4 @@ class Form extends React.Component<IProps> {
   }
 }
 
-export default Form;
 // vim: sw=2 ts=2 et:

@@ -1,9 +1,9 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import Form from './common/Form';
+import { FormCommunMaster } from '.';
 
-import { loginRequest } from '../actions';
+import { loginRequest } from '../../actions';
 
 export interface IProps {
   dispatch: any;
@@ -35,7 +35,10 @@ class Login extends React.Component <IProps> {
           <div className="form-page__form-header">
             <h2 className="form-page__form-heading">Login</h2>
           </div>
-          <Form data={formState} dispatch={dispatch} history={this.props.history} onSubmit={this._login} btnText={'Login'} error={error} currentlySending={currentlySending} />
+          <FormCommunMaster data={formState} dispatch={dispatch}
+            history={this.props.history} onSubmit={this._login}
+            btnText={'Login'} error={error}
+            currentlySending={currentlySending} />
         </div>
       </div>
     );
