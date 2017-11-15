@@ -9,6 +9,8 @@ if (global.process && process.env.NODE_ENV === 'test') {
   // If not, use the browser one
   localStorage = global.window.localStorage
 }
+console.log('Your local storage is:');
+console.log(localStorage);
 
 const auth = {
   /**

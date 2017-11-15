@@ -130,8 +130,8 @@ I've hesitated between TypeScript and Flow:
     * But seems to be a good practice to use this syntax in this context (indeed
         we want render again the component when we go to the Route)
         (https://github.com/ReactTraining/react-router/blob/master/packages/react-router/docs/api/Redirect.md)
-* In function loginFlow at src/sagas/index.ts, there was an unknown bug. Fixed
-    thanks a workaround.
+* ~~In function loginFlow at src/sagas/index.ts, there was an unknown bug. Fixed
+    thanks a workaround.~~
 * ~~To avoid the mandatory to modify `./node_modules/@types/react/index.d.ts`,
     (see bellow) change `<a />` to `<button />` and fix the problem with
     `<button />`.~~

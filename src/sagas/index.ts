@@ -47,6 +47,7 @@ export function * authorize({ username, password, isRegistering }) {
     isRegistering ?
       response = yield call(auth.register, username, hash)
       : response = yield call(auth.login, username, hash);
+    return response;
     } catch (error) {
     // If we get an error we send Redux the appropiate action and return
     yield put({ type: REQUEST_ERROR, error: error.message });
@@ -99,11 +100,8 @@ export function * loginFlow() {
     console.log('Value winner is:');
     console.log(winner);
 
-    // TODO fix this.
-    // BELLOW DOESN'T WORK WHEN I'VE PASSED TO TYPESCRIPT, I DON'T KNOW WHY
-    // // If `authorize` was the winner...
-    // if (winner.auth) {
-    if (true) {
+    // If `authorize` was the winner...
+    if (winner.auth) {
       // ...we send Redux appropiate actions
       yield put({ type: SET_AUTH, newAuthState: true }); // User is logged in (authorized)
       yield put({ type: CHANGE_FORM, newFormState: { username: '', password: '' } }); // Clear form
