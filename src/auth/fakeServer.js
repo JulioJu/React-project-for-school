@@ -25,7 +25,7 @@ const server = {
       const juanPass = hashSync('password', juanSalt)
 
       users = {
-        [juan]: hashSync(juanPass, salt)
+        [juan]: {password: hashSync(juanPass, salt), isFreelance: true}
       }
 
       localStorage.users = JSON.stringify(users)
@@ -45,9 +45,12 @@ const server = {
 
     return new Promise((resolve, reject) => {
       // If the user exists and the password fits log the user in and resolve
-      if (userExists && compareSync(password, users[username])) {
+      if (userExists && compareSync(password, users[username].password)) {
         resolve({
           authenticated: true,
+          user: {username:  username,
+            isFreelance: users[username].isFreelance
+          },
           // Fake a random token
           token: Math.random().toString(36).substring(7)
         })
@@ -75,7 +78,8 @@ const server = {
     return new Promise((resolve, reject) => {
       // If the username isn't used, hash the password with bcrypt to store it in localStorage
       if (!this.doesUserExist(username)) {
-        users[username] = hashSync(password, salt)
+        users[username] = {password: hashSync(password, salt),
+          isFreelance: true};
         localStorage.users = JSON.stringify(users)
 
         // Resolve when done
@@ -92,6 +96,7 @@ const server = {
   logout () {
     return new Promise(resolve => {
       localStorage.removeItem('token')
+      localStorage.removeItem('userLogged')
       resolve(true)
     })
   },
@@ -107,3 +112,5 @@ const server = {
 server.init()
 
 export default server
+
+// vim: sw=2 ts=2 et:

@@ -18,6 +18,7 @@ import {
   LOGIN_REQUEST,
   REGISTER_REQUEST,
   SET_AUTH,
+  SET_USER,
   LOGOUT,
   CHANGE_FORM,
   REQUEST_ERROR
@@ -52,11 +53,12 @@ export function * authorize({ username, password, isRegistering }) {
     // If we get an error we send Redux the appropiate action and return
     yield put({ type: REQUEST_ERROR, error: error.message });
 
-    return false;
+    return ;
    } finally {
     // When done, we tell Redux we're not in the middle of a request any more
     yield put({ type: SENDING_REQUEST, sending: false });
    }
+  // In typescript, retrun undefined by default, and not true.
  }
 
 /**
@@ -94,15 +96,16 @@ export function * loginFlow() {
     // lead to a race condition. This is unlikely, but just in case, we call `race` which
     // returns the "winner", i.e. the one that finished first
     const winner = yield race({
-      auth: call(authorize, { username, password, isRegistering: false }),
+      success: call(authorize, { username, password, isRegistering: false }),
       logout: take(LOGOUT)
      });
     console.log('Value winner is:');
     console.log(winner);
 
     // If `authorize` was the winner...
-    if (winner.auth) {
+    if (winner.success.authenticated) {
       // ...we send Redux appropiate actions
+      yield put({ type: SET_USER, newUser: winner.success.user }); // User is logged in (authorized)
       yield put({ type: SET_AUTH, newAuthState: true }); // User is logged in (authorized)
       yield put({ type: CHANGE_FORM, newFormState: { username: '', password: '' } }); // Clear form
       forwardTo('/dashboard'); // Go to dashboard page

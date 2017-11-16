@@ -19,14 +19,19 @@ const auth = {
   * @param  {string} password The password of the user
   */
   login (username, password) {
-    if (auth.loggedIn()) return Promise.resolve(true)
+    if (auth.loggedIn())
+      return Promise.resolve({ authenticated: response.authenticated,
+          user: response.user});
 
     // Post a fake request
     return request.post('/login', {username, password})
       .then(response => {
         // Save token to local storage
         localStorage.token = response.token
-        return Promise.resolve(true)
+        localStorage.userLogged = response.user.username;
+        return Promise.resolve({authenticated: response.authenticated,
+          user: response.user
+        });
       })
   },
   /**
@@ -40,6 +45,32 @@ const auth = {
   */
   loggedIn () {
     return !!localStorage.token
+  },
+  /**
+  * Retrieve user
+  */
+  // TODO we see here that JS is very bad. Lot of types checks !
+  loggedInUser () {
+    let userUndifined = {username: '',
+      isFreelance: true
+    };
+    if (!localStorage.users ||
+        !localStorage.userLogged)
+      return userUndifined;
+    let users = JSON.parse(localStorage.users);
+    console.log("Users saved in the BDD are:");
+    console.log(users);
+    let usernameLogged = localStorage.userLogged;
+    console.log("Your user logged is:");
+    let userLogged = auth.loggedIn() ?
+      {username: usernameLogged,
+       isFreelance: users[usernameLogged].isFreelance
+      }
+      : userUndifined;
+    if (typeof userLogged.isFreelance !== "boolean")
+      return userUndifined;
+    console.log(userLogged);
+    return userLogged;
   },
   /**
   * Registers a user and then logs them in
@@ -56,3 +87,5 @@ const auth = {
 }
 
 export default auth
+
+// vim: sw=2 ts=2 et:

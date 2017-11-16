@@ -6,6 +6,7 @@
 import {
   CHANGE_FORM,
   SET_AUTH,
+  SET_USER,
   SENDING_REQUEST,
   LOGIN_REQUEST,
   REGISTER_REQUEST,
@@ -30,6 +31,14 @@ export function changeForm(newFormState) {
  */
 export function setAuthState(newAuthState) {
   return { type: SET_AUTH, newAuthState };
+ }
+
+/**
+ * Sets the user
+ * @param  {user} the user object
+ */
+export function setUser(newUser) {
+  return { type: SET_USER, newUser };
  }
 
 /**
