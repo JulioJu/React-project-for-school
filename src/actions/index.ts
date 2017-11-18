@@ -73,6 +73,7 @@ export function logout() {
  * @param  {string } data.password The password of the user to register
  */
 export function registerRequest(data) {
+  console.log('Coucou from function registerRequest in action/index.tsx');
   return { type: REGISTER_REQUEST, data };
  }
 

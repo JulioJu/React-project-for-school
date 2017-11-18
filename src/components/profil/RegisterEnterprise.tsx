@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { FormWrapper } from '../common';
-import { RegisterCommun, FormEnterprise } from './';
+import { RegisterCommun, FormCompany } from './';
 
-export const RegisterEnterprise = () => (
-  <FormWrapper title="Register Enterprise">
+export const RegisterCompany = () => (
+  <FormWrapper title="Register Company">
     <RegisterCommun>
-      <FormEnterprise />
+      <FormCompany />
     </RegisterCommun>
   </FormWrapper>
 );

@@ -144,6 +144,8 @@ I've hesitated between TypeScript and Flow:
         `"~~
     * Probably this bugs was due to problem in src/sagas/index.ts (see above),
         but why ?
+    * Maybe, sometimes Redux-saga does not retrieve action with type
+        REGISTER_REQUEST : reload application to correct the error.
 
 ## Todos
 * In tsconfig.json, strictNullChecks must be true as Microsoft advise.

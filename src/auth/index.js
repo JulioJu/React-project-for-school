@@ -52,7 +52,7 @@ const auth = {
   // TODO we see here that JS is very bad. Lot of types checks !
   loggedInUser () {
     let userUndifined = {username: '',
-      isFreelance: true
+      isFreelance: null
     };
     if (!localStorage.users ||
         !localStorage.userLogged)

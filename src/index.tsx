@@ -29,7 +29,7 @@ import './styles/main.css';
 // Import pages
 import App from './components/App';
 import HomePage from './components/Home';
-import { LoginPage, RegisterPage, RegisterEnterprise, RegisterFreelance } from './components/profil';
+import { LoginPage, RegisterPage, RegisterCompany, RegisterFreelance } from './components/profil';
 import Dashboard from './components/Dashboard';
 import NotFound from './components/NotFound';
 
@@ -104,9 +104,9 @@ ReactDOM.render(
             <RegisterFreelance /> : <Redirect to="/" />}
           />
           <Route
-              path="/register-enterprise"
+              path="/register-company"
               render={() => !isAuth() ?
-            <RegisterEnterprise /> : <Redirect to="/" />}
+            <RegisterCompany /> : <Redirect to="/" />}
           />
           <Route
               path="/dashboard"

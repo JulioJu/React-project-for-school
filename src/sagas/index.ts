@@ -122,7 +122,11 @@ export function * logoutFlow() {
   while (true) {
     yield take(LOGOUT);
     yield put({ type: SET_AUTH, newAuthState: false });
-
+    const user = {
+      username: '',
+      isFreelance: null
+    };
+    yield put({ type: SET_USER, newUser: user }); // User is logged in (authorized)
     yield call(logout);
     forwardTo('/');
    }
@@ -134,6 +138,7 @@ export function * logoutFlow() {
  */
 export function * registerFlow() {
   while (true) {
+    console.log('Coucou from function registerFlow in sagas/index.tsx');
     // We always listen to `REGISTER_REQUEST` actions
     const request = yield take(REGISTER_REQUEST);
     const { username, password } = request.data;
@@ -143,8 +148,9 @@ export function * registerFlow() {
     const wasSuccessful = yield call(authorize, { username, password, isRegistering: true });
 
     // If we could register a user, we send the appropiate actions
-    if (wasSuccessful) {
+    if (wasSuccessful.authenticated) {
       yield put({ type: SET_AUTH, newAuthState: true }); // User is logged in (authorized) after being registered
+      yield put({ type: SET_USER, newUser: wasSuccessful.user }); // User is logged in (authorized)
       yield put({ type: CHANGE_FORM, newFormState: { username: '', password: '' } }); // Clear form
       forwardTo('/dashboard'); // Go to dashboard page
      }

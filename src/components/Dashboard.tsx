@@ -10,7 +10,7 @@ class Dashboard extends React.Component<{data}> {
   render() {
     const { user } = this.props.data;
     const statutPro = this.props.data.isFreelance ?
-      'a freelance' : 'an enterprise';
+      'a freelance' : 'a company';
     return (
       <article>
         <section className="text-section">

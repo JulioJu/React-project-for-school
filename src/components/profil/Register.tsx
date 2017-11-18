@@ -4,9 +4,9 @@ import { FormWrapper } from '../common';
 
 export const RegisterPage = () => (
   <FormWrapper title="Register: Are you freelance or an enteprise?">
-    <Link to="/register-enterprise"
+    <Link to="/register-company"
         className="btn btn--dash btn--nav">
-      Create an enterprise account
+      Create a company account
     </Link>
     <br />
     <br />

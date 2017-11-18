@@ -1,15 +1,15 @@
 import * as React from 'react';
 
-export const FormEnterprise = () => (
+export const FormCompany = () => (
   <div>
     <div className="form__field-wrapper">
         <input
         className="form__field-input"
-        id="enterpriseName"
+        id="companyName"
         type="text"
-        placeholder="Enterprise name" />
-        <label className="form__field-label" htmlFor="enterpriseName">
-        Enterprise name
+        placeholder="Company name" />
+        <label className="form__field-label" htmlFor="companyName">
+        Company name
         </label>
     </div>
     <div className="form__field-wrapper">
