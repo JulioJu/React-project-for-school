@@ -1,6 +1,6 @@
-// TODO fix this
-// tslint:disable:jsx-no-lambda no-submodule-imports
-// —————————————————————————————
+// tslint:disable-next-line:no-submodule-imports
+import 'bootstrap/dist/css/bootstrap.css';
+// import 'bootstrap/dist/css/bootstrap-theme.css';
 
 import registerServiceWorker from './registerServiceWorker';
 
@@ -10,10 +10,12 @@ import * as ReactDOM from 'react-dom';
 import { Switch, Router, Route, Redirect } from 'react-router-dom';
 
 // Redux
-import { createStore, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
 import createSagaMiddleware from 'redux-saga';
 import { createLogger } from 'redux-logger';
+
+import { reducer as formReducer } from 'redux-form';
 
 // Redux local config
 import reducer from './reducers';
@@ -29,9 +31,17 @@ import './styles/main.css';
 // Import pages
 import App from './components/App';
 import HomePage from './components/Home';
-import { LoginPage, RegisterPage, RegisterCompany, RegisterFreelance } from './components/profil';
+import { LoginPage, RegisterPage } from './components/profil';
 import Dashboard from './components/Dashboard';
 import NotFound from './components/NotFound';
+
+// Found at https://github.com/reactjs/redux/issues/2481
+declare module 'redux' {
+  // tslint:disable-next-line
+  export interface Store<S> {
+    getState(): any;
+  }
+}
 
 const logger = createLogger({
   // Ignore `CHANGE_FORM` actions in the logger, since they fire after every keystroke
@@ -40,13 +50,18 @@ const logger = createLogger({
 
 const sagaMiddleware = createSagaMiddleware();
 
+const rootReducer = combineReducers({
+  reducer,
+  form: formReducer
+});
+
 // Creates the Redux store using our reducer and the logger and saga middlewares
-const store = createStore(reducer, applyMiddleware(logger, sagaMiddleware));
+const store = createStore(rootReducer, applyMiddleware(logger, sagaMiddleware));
 // We run the root saga automatically
 sagaMiddleware.run(rootSaga);
 
 function isAuth() {
-  const { loggedIn } = store.getState();
+  const { loggedIn } = store.getState().reducer;
   store.dispatch(clearError());
   if (loggedIn) {
     return true;
@@ -90,26 +105,19 @@ ReactDOM.render(
           <Route exact path="/" component={HomePage} />
           <Route
               path="/login"
+              // tslint:disable-next-line:jsx-no-lambda
               render={() => !isAuth() ?
             <LoginPage /> : <Redirect to="/" />}
           />
           <Route
               path="/register"
+              // tslint:disable-next-line:jsx-no-lambda
               render={() => !isAuth() ?
             <RegisterPage /> : <Redirect to="/" />}
           />
           <Route
-              path="/register-freelance"
-              render={() => !isAuth() ?
-            <RegisterFreelance /> : <Redirect to="/" />}
-          />
-          <Route
-              path="/register-company"
-              render={() => !isAuth() ?
-            <RegisterCompany /> : <Redirect to="/" />}
-          />
-          <Route
               path="/dashboard"
+              // tslint:disable-next-line:jsx-no-lambda
               render={() => isAuth() ?
             <Dashboard /> : <Redirect to="/login" />}
           />

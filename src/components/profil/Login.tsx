@@ -53,7 +53,7 @@ class Login extends React.Component <IProps> {
 // Which props do we want to inject, given the global state?
 function select(state) {
   return {
-    data: state
+    data: state.reducer
   };
 }
 

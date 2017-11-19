@@ -34,7 +34,7 @@ class Home extends React.Component {
 }
 
 const mapStateToProps = state => ({
-    data: state
+    data: state.reducer
 });
 
 export default connect(mapStateToProps, null)(Home);

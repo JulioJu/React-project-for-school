@@ -24,3 +24,8 @@
 @import 'components/_form.css';
 @import 'components/_nav.css';
 @import 'components/_loading-indicator.css';
+
+/* Bootstrap */
+/* @TODO : use only React bootrap (see
+ https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md#adding-bootstrap) */
+@import 'bootstrap/dist/css/bootstrap.css';

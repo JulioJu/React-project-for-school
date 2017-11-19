@@ -149,6 +149,8 @@ I've hesitated between TypeScript and Flow:
 
 ## Todos
 * In tsconfig.json, strictNullChecks must be true as Microsoft advise.
+* Remove bootrasp in style/main.css and the others styles. Use only
+https://github.com/facebookincubator/create-react-app
 
 ## See also
 * https://react.rocks/

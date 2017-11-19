@@ -36,7 +36,7 @@ class App extends React.Component<IProps> {
 
 function select(state) {
   return {
-    data: state
+    data: state.reducer
   };
 }
 
