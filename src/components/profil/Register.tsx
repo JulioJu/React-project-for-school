@@ -15,7 +15,8 @@ declare module 'redux' {
   }
 }
 
-class RegisterCommun extends React.Component<{dispatch, history, data}> {
+class RegisterCommun extends
+  React.Component<{dispatch, history, data}, {isFreelance, isCompany}> {
 
   static propTypes = {
     data: PropTypes.object,
@@ -23,28 +24,27 @@ class RegisterCommun extends React.Component<{dispatch, history, data}> {
     dispatch: PropTypes.func
   };
 
-  isFreelance;
   companyOrFreelanceComponent;
 
   constructor (props: any) {
     super(props);
-    this.isFreelance = true;
     this._register = this._register.bind(this);
-    this.setFreelance = this.setFreelance.bind(this);
+    this.state = {
+      isFreelance: false,
+      isCompany: false
+    };
   }
 
-  setFreelance () {
-    const elt: any = document.querySelector('input[name="isFreelance"]:checked');
-    if (elt.value !== undefined) {
-      if (elt.value === 'freelance') {
-        this.companyOrFreelanceComponent = (<FormCompany />);
-      } else if (elt.value === 'company') {
-        this.companyOrFreelanceComponent = (<FormFreelance />);
-      } else {
-        this.isFreelance = null;
-      }
-    }
-    this.forceUpdate();
+  onClickSetFeelance(isFreenlanceCust: boolean): void {
+    isFreenlanceCust ?
+      this.setState({
+        isFreelance: true,
+        isCompany: false
+      })
+      : this.setState({
+        isFreelance: false,
+        isCompany: true
+        });
   }
 
   render () {
@@ -59,14 +59,15 @@ class RegisterCommun extends React.Component<{dispatch, history, data}> {
           {children}
         <br />
         <div>
-        <input type="radio" name="isFreelance" value="freelance" onClick={this.setFreelance} />
-        <label htmlFor="freelance">Freelance</label>
-        <br />
-        <input type="radio" name="isFreelance" value="company" onClick={this.setFreelance} />
-        <label htmlFor="company">Company</label>
+          <input type="radio" name="isFreelance" value="freelance" onClick={this.onClickSetFeelance.bind(this, true)} />
+          <label htmlFor="freelance">Freelance</label>
+          <br />
+          <input type="radio" name="isFreelance" value="company" onClick={this.onClickSetFeelance.bind(this, false)} />
+          <label htmlFor="company">Company</label>
         </div>
-        {this.companyOrFreelanceComponent}
-        </FormCommunMaster>
+          {this.state.isFreelance && <FormFreelance / >}
+          {this.state.isCompany && <FormCompany />}
+          </FormCommunMaster>
       </FormWrapper>
     );
   }
