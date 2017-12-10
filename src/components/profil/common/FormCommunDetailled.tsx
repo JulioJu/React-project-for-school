@@ -17,7 +17,7 @@ export const FormCommunDetailled = () => (
       <input
           className="form__field-input"
           id="email"
-          type="text"
+          type="email"
           placeholder="email"
         />
       <label className="form__field-label" htmlFor="email">

@@ -15,7 +15,7 @@ import { Provider } from 'react-redux';
 import createSagaMiddleware from 'redux-saga';
 import { createLogger } from 'redux-logger';
 
-import { reducer as formReducer } from 'redux-form';
+// import { reducer as formReducer } from 'redux-form';
 
 // Redux local config
 import reducer from './reducers';
@@ -51,8 +51,8 @@ const logger = createLogger({
 const sagaMiddleware = createSagaMiddleware();
 
 const rootReducer = combineReducers({
-  reducer,
-  form: formReducer
+  reducer
+  // form: formReducer
 });
 
 // Creates the Redux store using our reducer and the logger and saga middlewares
